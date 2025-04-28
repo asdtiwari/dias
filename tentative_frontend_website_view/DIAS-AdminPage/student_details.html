@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Faculty Details</title>
+  <link rel="stylesheet" href="student_details.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+
+  <!-- Top Header -->
+  <header class="top-bar">
+    <div class="logo">DIAS</div>
+    <div class="user-profile">
+
+      <div class="faculty-dropdown">
+        <i class="fa-solid fa-user-circle face-id-icon"></i>
+        <div class="dropdown-content" id="dropdownMenu">
+
+          <p><strong>Prof. Aeshna Preyasi</strong></p>
+          <a href="view_profile.html" id="viewProfileBtn">View Profile</a>
+          <a href="#" id="logoutBtn">Logout</a>
+        </div>
+      </div>
+
+      <a href="about.html">
+        <button type="button" class="about-btn">About</button>
+      </a>
+      
+    </div>
+  </header>
+
+  <!-- Search Box -->
+  <div class="search-container">
+    <input type="text" id="searchScholarId" placeholder="Search by scholar id">
+    <button onclick="searchFaculty()">Search</button>
+  </div>
+
+  <!-- Faculty Details Table -->
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Scholar id</th>
+          <th>Enrollment No</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Mobile</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody id="studentTableBody">
+        <tr>
+          <td>2200970</td>
+          <td>En22cs301060</td>
+          <td>Tish Sharma</td>
+          <td>aeshna@example.com</td>
+          <td>9876543210</td>
+          <td>student</td>
+        </tr>
+        <tr>
+          <td>2200970</td>
+          <td>En22cs301061</td>
+          <td>Aryan Malhotra</td>
+          <td>aryan@example.com</td>
+          <td>9876543211</td>
+          <td>student</td>
+        </tr>
+        <tr>
+            <td>2200970</td>
+          <td>En22cs301061</td>
+          <td>Aryan Malhotra</td>
+          <td>aryan@example.com</td>
+          <td>9876543211</td>
+          <td>student</td>
+        </tr>
+        <tr>
+            <td>2200970</td>
+          <td>En22cs301061</td>
+          <td>Aryan Malhotra</td>
+          <td>aryan@example.com</td>
+          <td>9876543211</td>
+          <td>student</td>
+        </tr>
+        <tr>
+            <td>2200970</td>
+          <td>En22cs301061</td>
+          <td>Aryan Malhotra</td>
+          <td>aryan@example.com</td>
+          <td>9876543211</td>
+          <td>student</td>
+        </tr>
+    
+        <tr>
+          <td>2200970</td>
+          <td>En22cs301061</td>
+          <td>Aryan Malhotra</td>
+          <td>aryan@example.com</td>
+          <td>9876543211</td>
+          <td>student</td>
+        </tr>
+        <tr>
+          <td>2200971</td>
+          <td>En22cs301061</td>
+          <td>Aryan Malhotra</td>
+          <td>aryan@example.com</td>
+          <td>9876543211</td>
+          <td>student</td>
+        </tr>
+       
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    function searchFaculty() {
+      var input = document.getElementById("searchScholarId").value.toUpperCase();
+      var table = document.getElementById("studentTableBody");
+
+      var tr = table.getElementsByTagName("tr");
+      for (var i = 0; i < tr.length; i++) {
+        var td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          var txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(input) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }       
+      }
+    }
+  </script>
+   <script>
+    const faceIdIcon = document.querySelector('.face-id-icon');
+    const dropdown = document.getElementById('dropdownMenu');
+    const editProfileLink = document.querySelector('.edit-profile-link'); 
+    const editProfileModal = document.getElementById('editProfileModal');
+    const closeModal = document.getElementById('closeModal');
+  
+    
+    faceIdIcon.addEventListener('click', () => {
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    });
+  
+    
+    window.addEventListener('click', (e) => {
+      if (!e.target.closest('.faculty-dropdown')) {
+        dropdown.style.display = 'none';
+      }
+  
+      if (e.target === editProfileModal) {
+        editProfileModal.style.display = 'none';
+      }
+    });
+  
+    
+    document.getElementById('viewProfileBtn').addEventListener('click', () => {
+      window.location.href = 'view_profile.html'; 
+      dropdown.style.display = 'none';
+    });
+  
+    
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      alert('Logging out...');
+      dropdown.style.display = 'none';
+      
+    });
+  
+    
+    editProfileLink.addEventListener('click', () => {
+      editProfileModal.style.display = 'block';
+    });
+  
+    
+    closeModal.addEventListener('click', () => {
+      editProfileModal.style.display = 'none';
+    });
+  </script>
+
+</body>
+</html>

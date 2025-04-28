@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Profile</title>
+    <link rel="stylesheet" href="view_profile.css">
+    
+    <script>
+        function toggleEdit() {
+            const inputs = document.querySelectorAll('.profile-box input');
+            const editBtn = document.getElementById('editBtn');
+            const submitBtn = document.getElementById('submitBtn');
+
+            let isEditing = editBtn.style.display === 'none';
+
+            inputs.forEach(input => {
+                input.readOnly = isEditing;
+            });
+
+            editBtn.style.display = isEditing ? 'inline-block' : 'none';
+            submitBtn.style.display = isEditing ? 'none' : 'inline-block';
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Top Header -->
+    <header class="top-bar">
+        <div class="logo">DIAS</div>
+        <div class="user-profile">
+            <div class="faculty-dropdown">
+                <i class="fa-solid fa-user-circle face-id-icon"></i>
+                <div class="dropdown-content" id="dropdownMenu">
+                    <p><strong>Prof. Aeshna Preyasi</strong></p>
+                    <a href="#">View Profile</a>
+                    <a href="#">Logout</a>
+                </div>
+            </div>
+            <button type="button" class="about-btn">About</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <h2>Faculty Profile</h2>
+
+        <div class="profile-box">
+            <label>Name of Faculty:</label>
+            <input type="text" value="Prof. Aeshna Preyasi" readonly />
+
+            <label>User Role:</label>
+            <input type="text" value="Faculty" readonly />
+
+            <label>Email:</label>
+            <input type="text" value="aeshna@example.com" readonly />
+
+            <label>Mobile No:</label>
+            <input type="text" value="9876543210" readonly />
+
+            <label>Teacher ID:</label>
+            <input type="text" value="TCH123" readonly />
+        </div>
+
+        <div class="button-container">
+            <button id="editBtn" onclick="toggleEdit()">Edit</button>
+            <button id="submitBtn" style="display: none;" onclick="toggleEdit()">Submit</button>
+        </div>
+    </main>
+</body>
+
+</html>

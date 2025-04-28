@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Faculty Portal - DIAS</title>
+  <link rel="stylesheet" href="homepage.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<script>
+  document.getElementById('hostForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const classInput = document.getElementById('classesInput').value.trim();
+
+
+    localStorage.setItem('selectedClass', classInput);
+
+
+    window.location.href = 'mark_attendance.html';
+  });
+</script>
+
+<!-- Edit Profile Modal -->
+
+<div id="editProfileModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeModal">&times;</span>
+    <h3>Edit Profile</h3>
+    <form>
+      <label for="username">User Name</label>
+      <input type="text" id="username" placeholder="Enter your name" required />
+      <button type="submit">Update Profile</button>
+    </form>
+  </div>
+</div>
+
+
+
+<body>
+  <header class="top-bar">
+    <div class="logo">DIAS</div>
+    <div class="user-profile">
+
+      <div class="faculty-dropdown">
+        <i class="fa-solid fa-user-circle face-id-icon"></i>
+        <div class="dropdown-content" id="dropdownMenu">
+
+          <p><strong>Prof. Aeshna Preyasi</strong></p>
+          <a href="view_profile.html" id="viewProfileBtn">View Profile</a>
+          <a href="#" id="logoutBtn">Logout</a>
+        </div>
+      </div>
+
+      <button type="button" class="about-btn">About</button>
+    </div>
+  </header>
+
+  <main class="main-container">
+
+    <!-- Host Attendance -->
+
+    <div class="card">
+      <h2>Host Attendance</h2>
+      <form id="hostForm" class="horizontal-form">
+        <input type="text" placeholder="Course Code" required />
+        <input type="text" placeholder="Room No." required />
+        <input type="date" required />
+        <select required>
+          <option value="">Select Mode</option>
+          <option value="practical">Practical</option>
+          <option value="theory">Theory</option>
+        </select>
+        <input type="time" required />
+        <input type="text" placeholder="Classes (e.g. A, B+C)" required />
+        <button type="submit" class="action-btn">Host</button>
+      </form>
+    </div>
+
+
+    <!-- View Attendance -->
+
+    <div class="card">
+      <h2>View Attendance</h2>
+      <form class="horizontal-form">
+        <select id="viewOption">
+          <option value="">Select View Type</option>
+          <option value="student">Student-wise</option>
+          <option value="class">Class-wise</option>
+          <option value="subject">Subject-wise</option>
+        </select>
+        <div id="viewInputs"></div>
+        <button type="submit" class="action-btn">View</button>
+      </form>
+    </div>
+
+
+    <!-- Modify Attendance -->
+
+    <div class="card">
+      <h2>Modify Attendance</h2>
+      <form class="horizontal-form">
+        <select id="modifyOption">
+          <option value="">Select Modify Option</option>
+          <option value="decrease">Decrease Denominator</option>
+          <option value="add">Add Attendance</option>
+        </select>
+        <div id="modifyInputs"></div>
+        <button type="submit" class="action-btn">Modify</button>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    const viewOption = document.getElementById('viewOption');
+    const viewInputs = document.getElementById('viewInputs');
+    viewOption.addEventListener('change', () => {
+      viewInputs.innerHTML = '';
+      if (viewOption.value === 'student') {
+        viewInputs.innerHTML = `
+          <input type="text" placeholder="Enrollment No" required />
+          <input type="text" placeholder="Student Name" required />
+          <input type="text" placeholder="Class" required />
+        `;
+      } else if (viewOption.value === 'class') {
+        viewInputs.innerHTML = `
+          <select required>
+            <option>Select Class</option>
+            <option>Class A</option>
+            <option>Class B</option>
+            <option>Class C</option>
+          </select>`;
+      } else if (viewOption.value === 'subject') {
+        viewInputs.innerHTML = `
+          <select required>
+            <option>Select Subject</option>
+            <option>Math</option>
+            <option>Science</option>
+            <option>English</option>
+          </select>`;
+      }
+    });
+
+    const modifyOption = document.getElementById('modifyOption');
+    const modifyInputs = document.getElementById('modifyInputs');
+    modifyOption.addEventListener('change', () => {
+      modifyInputs.innerHTML = '';
+      if (modifyOption.value === 'decrease' || modifyOption.value === 'add') {
+        modifyInputs.innerHTML = `
+          <input type="text" placeholder="Enrollment No" required />
+          <input type="text" placeholder="Student Name" required />
+          <select required>
+            <option>Select Subject</option>
+            <option>Math</option>
+            <option>Science</option>
+            <option>English</option>
+          </select>`;
+      }
+    });
+  </script>
+  <script>
+    const faceIdIcon = document.querySelector('.face-id-icon');
+    const dropdown = document.getElementById('dropdownMenu');
+    const editProfileLink = document.querySelector('.edit-profile-link'); 
+    const editProfileModal = document.getElementById('editProfileModal');
+    const closeModal = document.getElementById('closeModal');
+
+    
+    faceIdIcon.addEventListener('click', () => {
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    });
+
+    
+    window.addEventListener('click', (e) => {
+      if (!e.target.closest('.faculty-dropdown')) {
+        dropdown.style.display = 'none';
+      }
+
+      if (e.target === editProfileModal) {
+        editProfileModal.style.display = 'none';
+      }
+    });
+
+    
+    document.getElementById('viewProfileBtn').addEventListener('click', () => {
+      window.location.href = 'view_profile.html'; 
+      dropdown.style.display = 'none';
+    });
+
+    
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      alert('Logging out...');
+      dropdown.style.display = 'none';
+      
+    });
+
+    
+    editProfileLink.addEventListener('click', () => {
+      editProfileModal.style.display = 'block';
+    });
+
+    
+    closeModal.addEventListener('click', () => {
+      editProfileModal.style.display = 'none';
+    });
+  </script>
+</body>
+
+</html>

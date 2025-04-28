@@ -1,0 +1,264 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  background: linear-gradient(to right, #242323b6, #332626);
+  color: #fff;
+}
+.logo {
+  color: #000;
+  font-size: 24px;
+  font-weight: bold;
+}
+.about-btn {
+  background: linear-gradient(to right, #ffffff, #0e0d0d);
+  border: 1px solid #000;
+  color: #ffffff;
+  padding: 6px 12px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.top-bar {
+  width: 100%;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f1f1;
+  color: rgb(54, 53, 53);
+  margin-bottom: 20px;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.faculty-dropdown {
+  position: relative;
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.face-id-icon {
+  font-size: 25px;
+  color: rgb(54, 52, 52);
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: rgb(165, 160, 160);
+  color: black;
+  min-width: 250px;
+  right: 10;
+  top: 50px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  padding: 10px 20px;
+  border-radius: 8px;
+  z-index: 1;
+}
+.dropdown-btn {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+  border: none;
+  background-color: #eee;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.dropdown-btn:hover {
+  background-color: #ddd;
+}
+
+.dropdown-content p {
+  margin: 0;
+  font-weight: bold;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+.dropdown-content a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 5px;
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 99;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+  background-color: rgb(175, 168, 168);
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+}
+
+.modal-content h3 {
+  margin-bottom: 15px;
+}
+
+.modal-content input {
+  width: 90%;
+  padding: 8px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+}
+
+.modal-content button {
+  padding: 8px 15px;
+  border: none;
+  background-color: #5f6061;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-content button:hover {
+  background-color: #0d0d0e;
+}
+
+.close-btn {
+  float: right;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  h2 {
+    color: black;
+  }
+}
+
+.horizontal-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 15px;
+}
+
+.horizontal-form input,
+.horizontal-form select {
+  flex: 1 1 150px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.action-btn {
+  padding: 10px 20px;
+  background-color: #494747;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.action-btn:hover {
+  background-color: #000;
+}
+.profile-box {
+  width: 400px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #bbb4b4;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-box label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+  color: rgb(31, 30, 30);
+}
+
+.profile-box input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #777575;
+  border-radius: 6px;
+  background-color: #e3e6e9;
+}
+
+#editBtn,
+#submitBtn {
+  background: linear-gradient(to right, #bbb5b5, #1f1d1d);
+  border: 1px solid #000;
+  color: #ffffff;
+  padding: 6px 12px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .horizontal-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .horizontal-form input,
+  .horizontal-form select {
+    width: 100%;
+    flex: none;
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .action-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+  }
+  .logo {
+    color: #000;
+    font-size: 24px;
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Page</title>
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+</head>
+
+<body>
+
+  <!-- Top Header -->
+  <header class="top-bar">
+    <div class="logo">DIAS</div>
+    <div class="user-profile">
+
+      <div class="faculty-dropdown">
+        <i class="fa-solid fa-user-circle face-id-icon"></i>
+        <div class="dropdown-content" id="dropdownMenu">
+
+          <p><strong>Prof. Aeshna Preyasi</strong></p>
+          <a href="view_profile.html" id="viewProfileBtn">View Profile</a>
+          <a href="#" id="logoutBtn">Logout</a>
+        </div>
+      </div>
+
+      <a href="about.html">
+        <button type="button" class="about-btn">About</button>
+      </a>
+      
+    </div>
+  </header>   
+
+  <!-- Main Content -->
+  <main class="admin-main">
+
+    <!-- View Attendance Card -->
+    <div class="card">
+      <h2>View Attendance</h2>
+      <form class="horizontal-form">
+        <select id="viewOption">
+          <option value="">Select View Type</option>
+          <option value="student">Student-wise</option>
+          <option value="class">Class-wise</option>
+          <option value="subject">Subject-wise</option>
+        </select>
+        <div id="viewInputs"></div>
+        <button type="submit" class="action-btn">View</button>
+      </form>
+    </div>
+
+    <!-- Admin/Faculty Details Card -->
+    <div class="card">
+      <h3>Admin / Faculty Details</h3>
+      <button onclick="location.href='faculty_details.html'">View Faculty Details</button>
+    </div>
+
+    <!-- Student Details Card -->
+    <div class="card">
+      <h3>Student Details</h3>
+      <button onclick="location.href='student_details.html'">View Student Details</button>
+    </div>
+
+    <!-- Block User Card -->
+    <div class="card">
+      <h3>Block User</h3>
+      <button onclick="openBlockModal()">Block a User</button>
+    </div>
+
+    <!-- Accept Reset Requests Card -->
+    <div class="card">
+      <h3>Accept Reset Requests</h3>
+      <button onclick="location.href='acceptReset.html'">View Reset Requests</button>
+    </div>
+
+  </main>
+
+  <!-- Block User Modal -->
+  <div id="blockUserModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeModal">&times;</span> <!-- cross button -->
+      <h3>Block User</h3>
+      <input type="text" id="blockUserId" placeholder="Enter User ID">
+      <button>Block</button>
+    </div>
+  </div>
+
+
+  <!-- Scripts -->
+  <script>
+    
+    function openBlockModal() {
+      document.getElementById('blockUserModal').style.display = 'block';
+    }
+  
+    function closeBlockModal() {
+      document.getElementById('blockUserModal').style.display = 'none';
+    }
+  
+    // Cross button click pe modal close
+    document.getElementById('closeModal').addEventListener('click', closeBlockModal);
+  
+    // Background click pe modal close
+    window.addEventListener('click', function (event) {
+      const modal = document.getElementById('blockUserModal');
+      if (event.target === modal) {
+        closeBlockModal();
+      }
+    });
+  
+    
+    const viewOption = document.getElementById('viewOption');
+    const viewInputs = document.getElementById('viewInputs');
+  
+    viewOption.addEventListener('change', () => {
+      viewInputs.innerHTML = '';
+  
+      if (viewOption.value === 'student') {
+        viewInputs.innerHTML = `
+          <div class="vertical-form">
+            <input type="text" id="enrollment" placeholder="Enter Enrollment Number" required />
+            <input type="text" id="studentName" placeholder="Enter Student Name" required />
+            <input type="text" id="class" placeholder="Enter Class" required />
+          </div>
+        `;
+      }
+      else if (viewOption.value === 'class') {
+        viewInputs.innerHTML = `
+          <div class="vertical-form">
+            <select id="classSelect" required>
+              <option value="">Select Class</option>
+              <option value="Class A">Class A</option>
+              <option value="Class B">Class B</option>
+              <option value="Class C">Class C</option>
+            </select>
+          </div>
+        `;
+      }
+      else if (viewOption.value === 'subject') {
+        viewInputs.innerHTML = `
+          <div class="vertical-form">
+            <select id="subjectSelect" required>
+              <option value="">Select Subject</option>
+              <option value="Math">Math</option>
+              <option value="Science">Science</option>
+              <option value="English">English</option>
+            </select>
+          </div>
+        `;
+      }
+    });
+  </script>
+  <script>
+  const faceIdIcon = document.querySelector('.face-id-icon');
+  const dropdown = document.getElementById('dropdownMenu');
+  const editProfileLink = document.querySelector('.edit-profile-link'); 
+  const editProfileModal = document.getElementById('editProfileModal');
+  const closeModal = document.getElementById('closeModal');
+
+  
+  faceIdIcon.addEventListener('click', () => {
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+  });
+
+  
+  window.addEventListener('click', (e) => {
+    if (!e.target.closest('.faculty-dropdown')) {
+      dropdown.style.display = 'none';
+    }
+
+    if (e.target === editProfileModal) {
+      editProfileModal.style.display = 'none';
+    }
+  });
+
+  
+  document.getElementById('viewProfileBtn').addEventListener('click', () => {
+    window.location.href = 'view_profile.html'; 
+    dropdown.style.display = 'none';
+  });
+
+  
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    alert('Logging out...');
+    dropdown.style.display = 'none';
+    
+  });
+
+  
+  editProfileLink.addEventListener('click', () => {
+    editProfileModal.style.display = 'block';
+  });
+
+  
+  closeModal.addEventListener('click', () => {
+    editProfileModal.style.display = 'none';
+  });
+</script>
+  
+</body>
+
+</html>
